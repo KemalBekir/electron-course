@@ -1,6 +1,7 @@
 {
     "appId": "con.kbekir.electron-course",
     "files": ["dist-electron", "dist-rect"],
+    "extraResources": ["dist-electron/preload.cjs"],
     "icon": "./desktopIcon.png",
     "mac": {
         "target": "dmg"
