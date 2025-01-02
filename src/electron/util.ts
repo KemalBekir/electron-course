@@ -25,7 +25,7 @@ export function ipcMainOn<Key extends keyof EventPayloadMapping>(
   key: Key,
   handler: (payload: EventPayloadMapping[Key]) => void
 ) {
-  ipcMain.handle(key, (event, payload) => {
+  ipcMain.on(key, (event, payload) => {
     const senderFrame = event.senderFrame;
 
     if (!senderFrame) {

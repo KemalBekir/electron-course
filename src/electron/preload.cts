@@ -32,5 +32,6 @@ function ipcSend<Key extends keyof EventPayloadMapping>(
   key: Key,
   payload: EventPayloadMapping[Key]
 ) {
+  // console.log(`Sending IPC event: ${key} with payload: ${payload}`);
   electron.ipcRenderer.send(key, payload);
 }

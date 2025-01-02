@@ -1,8 +1,7 @@
-import { app, BrowserWindow, ipcMain, Menu, Tray } from "electron";
-import path from "path";
+import { app, BrowserWindow, Menu } from "electron";
 import { ipcMainHandle, ipcMainOn, isDev } from "./util.js";
 import { getStaticData, pollResources } from "./resourceManager.js";
-import { getAssetPath, getPreloadPath, getUIPath } from "./pathResolver.js";
+import { getPreloadPath, getUIPath } from "./pathResolver.js";
 import { createTray } from "./tray.js";
 import { createMenu } from "./menu.js";
 
@@ -11,7 +10,8 @@ app.on("ready", () => {
     webPreferences: {
       preload: getPreloadPath(),
     },
-    frame: false,
+    // disables default system frame (dont do this if you want a proper working menu bar)
+    frame: true,
   });
   if (isDev()) {
     mainWindow.loadURL("http://localhost:5123");
@@ -51,7 +51,6 @@ function handleCloseEvents(mainWindow: BrowserWindow) {
     if (willClose) {
       return;
     }
-
     e.preventDefault();
     mainWindow.hide();
     if (app.dock) {
